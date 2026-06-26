@@ -1,8 +1,10 @@
 from fastapi import FastAPI
+from predictor import generate_message
+from models import MessageResponse
 
 app = FastAPI()
 
 
-@app.get("/")
+@app.get("/", response_model=MessageResponse)
 def hello():
-    return {"message": "Hello, AI"}
+    return MessageResponse(message=generate_message("AI"))
